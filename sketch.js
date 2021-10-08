@@ -10,6 +10,7 @@ function preload() {
   platformImage = loadImage("images/stone.png");
   diamondImage = loadImage("images/diamond.png");
   spikeImage = loadImage("images/spikes.png");
+
   }
 
 function setup() {
@@ -32,11 +33,7 @@ function setup() {
 
 function draw() {
 
-if(gameState ==="PLAY"){
-
-  ironMan.setCollider("rectangle",0,0,200,500);
     //mario.scale =0.3;
-    bg.velocityY = 4;
     if (bg.y > 500){
       bg.y=bg.width/4;
     }
@@ -87,27 +84,8 @@ if(gameState ==="PLAY"){
         }
           
       }
-      if(score<=-10 || ironMan.y>610){
-       gameState ="END";
-      }
       
-}
-if(gameState ==="END"){
-  bg.velocityY=0;
-  ironMan.velocityY=0;
-  diamondsGroup.setVelocityYEach(0);
-  spikesGroup.setVelocityYEach(0);
-  platformGroup.setVelocityYEach(0);
-  diamondsGroup.setLifetimeEach(-1);
-  spikesGroup.setLifetimeEach(-1);
-  platformGroup.setLifetimeEach(-1);
-  
-  restart.visible=true;
-  if(mousePressedOver(restart)){
-   restartGame();
 
-  }
-}
   ironMan.collide(ground);
     drawSprites();
     textSize(20);
@@ -151,15 +129,4 @@ function generateSpikes() {
     spikes.lifetime = 600;
     spikesGroup.add(spikes);
   }
-}
-
-function restartGame(){
-  gameState ="PLAY";
-  platformGroup.destroyEach();
-  diamondsGroup.destroyEach();
-  spikesGroup.destroyEach();
-  score=0;
-  
-  ironMan.y=50;
-  restart.visible=false;
 }
